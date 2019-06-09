@@ -1,0 +1,29 @@
+
+spring:
+    datasource:
+        driver-class-name: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/project?serverTimezone=GMT%2B8
+        username: admin
+        password: 123456
+
+# mybatis配置
+mybatis:
+    mapper-location: 
+        classpath*: mapper/**/*.xml
+#ActiveMQ配置
+activemq:
+   broker-url : tcp://127.0.0.1:61616
+   user : admin
+   password : admin
+   in-memory : true
+   pool :
+       #是否使用PooledConnectionFactory，默认false（默认使用ConnectionFactory），若要设为true，则需添加activemq-pool依赖
+       enabled : true
+       #最大连接数
+       max-connections: 50
+       #连接超时时间
+       expiry-timeout: 10000
+       #空闲时间
+       idle-timeout: 30000
+   queueName: publish.queue
+   topicName: publish.topic
