@@ -12,11 +12,11 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.demo.module.models.User;
 
 public class JwtUtil {
-    private Integer timestamp = 10000*60;
+    private Integer timestamp = 60000;
     Algorithm algorithm = Algorithm.HMAC256("secret");
 
     public String generateToken(User user) {
-        Long expMillis = System.currentTimeMillis()+timestamp;
+        Long expMillis = new Date().getTime()+ timestamp;
         Date exp = new Date(expMillis);
         String jwt = JWT.create()
                 .withClaim("username", user.getUsername())
@@ -31,8 +31,8 @@ public class JwtUtil {
         Map<String,Claim> map =jwt.getClaims();
         Date time = jwt.getExpiresAt();
         Map<String,Object> mp = new HashMap<>();
-        mp.put("username", map.get("username"));
-        mp.put("password", map.get("password"));
+        mp.put("username", map.get("username").asString());
+        mp.put("password", map.get("password").asString());
         mp.put("expireDate", time.toString());
         return mp;
     }
