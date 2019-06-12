@@ -9,6 +9,16 @@
       "mainClass": "com.example.demo.SringDemoApplication",
       "projectName": "sringDemo",
       "args": ""
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-SringDemoApplication<springDemo>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.example.demo.SringDemoApplication",
+      "projectName": "springDemo",
+      "args": ""
     }
   ]
 }
