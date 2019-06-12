@@ -2,6 +2,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CodeLens (Launch) - SringDemoApplication",
+      "request": "launch",
+      "mainClass": "com.example.demo.SringDemoApplication",
+      "projectName": "springDemo"
+    },
+    {
+      "type": "java",
       "name": "Spring Boot-SringDemoApplication<sringDemo>",
       "request": "launch",
       "cwd": "${workspaceFolder}",
