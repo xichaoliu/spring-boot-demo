@@ -25,7 +25,7 @@ public class JwtUtil {
         return jwt;
     }
 
-    public Object parseToken(String token) {
+    public String parseToken(String token) {
         JWTVerifier verifier = JWT.require(algorithm).build();
         DecodedJWT jwt = verifier.verify(token);
         Map<String,Claim> map =jwt.getClaims();
@@ -34,6 +34,6 @@ public class JwtUtil {
         mp.put("username", map.get("username").asString());
         mp.put("password", map.get("password").asString());
         mp.put("expireDate", time.toString());
-        return mp;
+        return map.get("username").asString();
     }
 }

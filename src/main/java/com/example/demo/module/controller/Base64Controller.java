@@ -36,7 +36,7 @@ public class Base64Controller {
   @PostMapping("base")
   @Login
   public Object handleUrl(@RequestBody Map<String,String> param) {
-    JwtUtil jwt = new JwtUtil();
-    return jwt.parseToken(param.get("token"));
+    // JwtUtil jwt = new JwtUtil();
+    return param;
   }
 }
