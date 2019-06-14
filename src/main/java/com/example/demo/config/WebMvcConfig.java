@@ -1,11 +1,14 @@
 package com.example.demo.config;
 
-import com.example.intercepor.AuthorizationInterceptor;
+import com.example.demo.interceptor.AuthorizationInterceptor;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
@@ -13,23 +16,29 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * 重写WebMvcConfigurer
  */
 @Configuration
+@Component
 public class WebMvcConfig implements WebMvcConfigurer {
-  @Autowired
-  private  AuthorizationInterceptor authorizationInterceptor;
- 
- 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(authorizationInterceptor).addPathPatterns("/**");
+    registry.addInterceptor(authorInterceptor()).addPathPatterns("/**");
   }
-  @Override
-    public void addCorsMappings(CorsRegistry registry) {
-    	registry.addMapping("/**")
-    	.allowedOrigins("*")
-    	.allowedHeaders("*")
-        .allowedMethods("GET", "HEAD", "POST","PUT", "DELETE", "OPTIONS")
-        .allowCredentials(false).maxAge(3600);
-    }
+ @Override
+  public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+    configurer.enable();
+  }
+  @Bean
+  public AuthorizationInterceptor authorInterceptor() {
+    return new AuthorizationInterceptor();
+  }
+  // @Override
+  // public void addCorsMappings(CorsRegistry registry) {
+  //   registry.addMapping("/**")
+  //   .allowedOrigins("*")
+  //   .allowedHeaders("*")
+  //     .allowedMethods("GET", "HEAD", "POST","PUT", "DELETE", "OPTIONS")
+  //     .allowCredentials(false).maxAge(3600);
+  // }
+   
   // @Bean
   // public WebMvcConfigurer corsConfigurer() {
   //   return new WebMvcConfigurer() {

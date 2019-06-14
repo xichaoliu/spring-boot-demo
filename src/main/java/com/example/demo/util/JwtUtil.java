@@ -11,12 +11,17 @@ import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.example.demo.module.models.User;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
 public class JwtUtil {
-    private Integer timestamp = 60000;
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    private Integer timestamp = 10*60*10*60*1000; // 10小时
     Algorithm algorithm = Algorithm.HMAC256("secret");
 
     public String generateToken(User user) {
-        Long expMillis = new Date().getTime()+ timestamp;
+        Long expMillis = new Date().getTime() + timestamp;
         Date exp = new Date(expMillis);
         String jwt = JWT.create()
                 .withClaim("username", user.getUsername())

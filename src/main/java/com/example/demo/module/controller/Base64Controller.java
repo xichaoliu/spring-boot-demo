@@ -33,8 +33,8 @@ public class Base64Controller {
   //       logger.info("url:" + url);
   //       ctb.downloadFile(url);    
   // }
-  @PostMapping("base")
   @Login
+  @PostMapping("base")
   public Object handleUrl(@RequestBody Map<String,String> param) {
     // JwtUtil jwt = new JwtUtil();
     return param;

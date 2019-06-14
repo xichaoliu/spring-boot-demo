@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class UndoLogAspect {
 
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
-  @Pointcut("@annotation(com.example.demo.annotation.UndoLog)")
+  @Pointcut("@annotation(com.example.demo.annotation.Login)")
   public void logPointCut() {}
 
   @Before("logPointCut()")

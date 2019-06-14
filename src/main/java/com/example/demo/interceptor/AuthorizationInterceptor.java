@@ -3,7 +3,6 @@ package com.example.demo.interceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.auth0.jwt.interfaces.Claim;
 import com.example.demo.annotation.Login;
 import com.example.demo.util.JwtUtil;
 import com.example.demo.util.*;
@@ -14,18 +13,19 @@ import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.server.ServletServerHttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import org.springframework.stereotype.Service;
-
-@Component
-@Service("authorizationInterceptor")
-public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
+import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
+// @Component
+public class AuthorizationInterceptor implements HandlerInterceptor {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
   private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
+  public AuthorizationInterceptor () {
+    logger.info("初始化拦截器");
+  }
    @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        logger.info("---前置方法被执行---");
         JwtUtil jwt = new JwtUtil();
         Login annotation;
         if (handler instanceof HandlerMethod) {
@@ -37,7 +37,7 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
           return true;
         }
         String token = request.getHeader("token");
-        logger.info("token"+token);
+        logger.info("token: "+token);
         if (token.isEmpty()) {
           return false;
           // throw new Exception("token不能为空");
@@ -57,8 +57,13 @@ public class AuthorizationInterceptor extends HandlerInterceptorAdapter {
         }
         return true;
   }
-
+  @Override
+  public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+      ModelAndView modelAndView) throws Exception {
+        logger.info("---后置方法被执行---");
+  }
   @Override
   public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    logger.info("---最终方法被执行---");
   }
 }
