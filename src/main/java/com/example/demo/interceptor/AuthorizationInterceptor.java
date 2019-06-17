@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 // @Component
 public class AuthorizationInterceptor implements HandlerInterceptor {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
-  private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter;
+  private MappingJackson2HttpMessageConverter mappingJackson2HttpMessageConverter = new MappingJackson2HttpMessageConverter();
   public AuthorizationInterceptor () {
     logger.info("初始化拦截器");
   }
@@ -52,7 +52,12 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
           response.setHeader("Access-Control-Max-Age", "3600");
         HttpOutputMessage httpOutputMessage = new ServletServerHttpResponse(response);
         ResponseResultForm responseResult = new ResponseResultForm(401,false,"token过期,请重新登陆",null);
-        mappingJackson2HttpMessageConverter.write(responseResult, MediaType.APPLICATION_JSON_UTF8, httpOutputMessage);
+        try {
+          mappingJackson2HttpMessageConverter.write(responseResult, MediaType.APPLICATION_JSON_UTF8, httpOutputMessage);          
+        } catch (Exception e) {
+          //TODO: handle exception
+          logger.error("错误"+ e.getMessage());
+        }
         return false;
         }
         return true;
