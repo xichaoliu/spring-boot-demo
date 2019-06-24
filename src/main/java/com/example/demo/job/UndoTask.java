@@ -15,7 +15,7 @@ public class UndoTask {
   @Scheduled(cron="*/5 * * * * ?")
   protected void doTask() {
     logger.info("---启动定时任务，查询数据---");
-    undoService.query();
+    // undoService.query();
     logger.info("--查询结束--");
   }
 }

@@ -97,6 +97,11 @@
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-pool</artifactId>
 	</dependency>
+	  <dependency>  
+                <groupId>com.alibaba</groupId>  
+                <artifactId>druid</artifactId>  
+                <version>1.0.9</version>  
+            </dependency>
 	</dependencies>
 
 	<build>
@@ -110,5 +115,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>

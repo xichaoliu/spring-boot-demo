@@ -1,5 +1,7 @@
 package com.example.demo.module.service;
 
+import com.example.demo.module.entity.User;
+
 public interface UndoService {
-  void query();
+  User query(Integer id);
 }
