@@ -2,9 +2,11 @@ package com.example.demo.module.dao;
 
 import com.example.demo.module.entity.User;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
-@Repository
+// import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+/**
+ * mapper接口
+ */
 public interface UndoDao {
-    public User query(Integer id);
+    public User query(@Param("id") Integer id);
 }
