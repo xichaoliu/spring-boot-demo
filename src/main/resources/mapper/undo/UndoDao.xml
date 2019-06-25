@@ -13,4 +13,7 @@
     <select id="query" parameterType="java.lang.Integer" resultType="com.example.demo.module.entity.User">
         select * from blog_usr where id = #{id}
     </select>
+    <select id="addUser" parameterType="com.example.demo.module.entity.User">
+       insert into blog_usr (usrname,password) values(#{usrname},#{password});
+    </select>
 </mapper>

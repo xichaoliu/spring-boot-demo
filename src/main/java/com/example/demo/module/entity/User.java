@@ -1,11 +1,17 @@
 package com.example.demo.module.entity;
 
 public class User {
-    private int id;
+    // private int id;
     private String usrname;
+    private String password;
 
-    public Integer getId() {
-        return id;
+  
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUsrname() {
@@ -15,8 +21,11 @@ public class User {
     public void setUsrname(String usrname) {
         this.usrname = usrname;
     }
+    // public Integer getId() {
+    //     return id;
+    // }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    // public void setId(Integer id) {
+    //     this.id = id;
+    // }
 }

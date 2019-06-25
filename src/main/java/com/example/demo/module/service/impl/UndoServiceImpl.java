@@ -17,4 +17,7 @@ public class UndoServiceImpl implements UndoService {
   public User query(Integer id) {
     return  undoDao.query(id);
   }
+  public Boolean addUser(User user) {
+    return undoDao.addUser(user);
+  }
 }

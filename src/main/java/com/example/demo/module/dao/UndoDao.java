@@ -9,4 +9,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface UndoDao {
     public User query(@Param("id") Integer id);
+    public Boolean addUser(User user);
 }
