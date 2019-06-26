@@ -17,4 +17,7 @@
        <!-- insert into blog_usr (usrname,password) values(#{usrname},#{password}); -->
        insert into blog_usr (usrname,password) select #{usrname},#{password} where not exists (select id from blog_usr where usrname=#{usrname});
     </select>
+      <select id="removeUsr" parameterType="Integer">
+        delete from blog_usr where id=#{id}
+    </select>
 </mapper>

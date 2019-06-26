@@ -20,4 +20,7 @@ public class UndoServiceImpl implements UndoService {
   public Boolean addUser(User user) {
     return undoDao.addUser(user);
   }
+  public void removeUsr(Integer id) {
+    undoDao.removeUsr(id);
+  }
 }
