@@ -18,6 +18,9 @@
        insert into blog_usr (usrname,password) select #{usrname},#{password} where not exists (select id from blog_usr where usrname=#{usrname});
     </select>
       <select id="removeUsr" parameterType="Integer">
-        delete from blog_usr where id=#{id}
+        <!-- 物理删 -->
+        <!-- delete from blog_usr where id=#{id} -->
+        <!-- 逻辑删 -->
+        update blog_usr set status = 1 where id = #{id};
     </select>
 </mapper>
