@@ -18,14 +18,13 @@ import org.springframework.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import Decoder.BASE64Encoder;
 public class ConvertUrlToBase64 {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
   HttpServletRequest request;
 
     HttpServletResponse response;
   
-  public void downloadFile(String imgURL) throws Exception {
+    public void downloadFile(String imgURL) throws Exception {
 
             InputStream inStream;
             try {  
@@ -66,7 +65,7 @@ public class ConvertUrlToBase64 {
         HttpHeaders headers = new HttpHeaders();
         String filename = "测试图片.jpg";
    
-        	// response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(filename,"UTF-8"));
+        	response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(filename,"UTF-8"));
 
 
         // 将字节流写入Response
@@ -74,4 +73,6 @@ public class ConvertUrlToBase64 {
         toClient.write(data);
         toClient.flush();
     }
- }
+ 
+
+}
