@@ -2,14 +2,16 @@
 spring:
     datasource:
         driver-class-name: com.mysql.jdbc.Driver
-        url: jdbc:mysql://127.0.0.1:3306/project?serverTimezone=GMT%2B8
-        username: admin
+        url: jdbc:mysql://127.0.0.1:3306/blog_usr?serverTimezone=GMT%2B8
+        username: root
         password: 123456
 
 # mybatis配置
 mybatis:
-    mapper-location: 
-        classpath*: mapper/**/*.xml
+    #配置mapper xml文件所在的路径
+    mapper-locations: classpath*:mapper/**/*.xml
+    #配置映射类所在的包名
+    type-aliases-package: com.example.demo.module.entity
 #ActiveMQ配置
 activemq:
    broker-url : tcp://127.0.0.1:61616

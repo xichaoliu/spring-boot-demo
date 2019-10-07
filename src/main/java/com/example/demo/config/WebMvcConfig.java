@@ -12,32 +12,29 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
- * 配置跨域
- * 重写WebMvcConfigurer
+ * 拦截器+跨域配置
  */
 @Configuration
 @Component
 public class WebMvcConfig implements WebMvcConfigurer {
+  @Autowired
+  AuthorizationInterceptor authorizationInterceptor; 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(authorInterceptor()).addPathPatterns("/**");
+    registry.addInterceptor(authorizationInterceptor).addPathPatterns("/**");
   }
  @Override
   public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
     configurer.enable();
   }
-  @Bean
-  public AuthorizationInterceptor authorInterceptor() {
-    return new AuthorizationInterceptor();
+  @Override
+  public void addCorsMappings(CorsRegistry registry) {
+    registry.addMapping("/**")
+    .allowedOrigins("*")
+    .allowedHeaders("*")
+      .allowedMethods("GET", "HEAD", "POST","PUT", "DELETE", "OPTIONS")
+      .allowCredentials(false).maxAge(3600);
   }
-  // @Override
-  // public void addCorsMappings(CorsRegistry registry) {
-  //   registry.addMapping("/**")
-  //   .allowedOrigins("*")
-  //   .allowedHeaders("*")
-  //     .allowedMethods("GET", "HEAD", "POST","PUT", "DELETE", "OPTIONS")
-  //     .allowCredentials(false).maxAge(3600);
-  // }
    
   // @Bean
   // public WebMvcConfigurer corsConfigurer() {

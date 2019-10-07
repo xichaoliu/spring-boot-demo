@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.guxf.mapper.AuthorMapper">
+<mapper namespace="com.example.demo.module.dao.UndoDao">
     <!-- 此处需要注意的是，由于我们数据库定义的id存储类型为intbig,但是我们的Entity中Id是Long -->
     <!-- 前面的两种方式插入没问题，此处报了数据库类型异常 -->
     <!-- 所以数据库的ID类型改为了Varchar -->
-    <!-- <resultMap id="authorMap" type="com.guxf.domain.Author">
-        <id column="id" property="id" jdbcType="VARCHAR" />
-        <result column="real_name" property="realName" jdbcType="VARCHAR" />
-        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <!-- <resultMap id="authorMap" type="com.example.demo.module.entity.User">
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="usrname" property="usrname" jdbcType="VARCHAR" />
+        <result column="passowrd" property="passowrd" jdbcType="VARCHAR" />
     </resultMap> -->
+
+    <select id="query" parameterType="java.lang.Integer" resultType="com.example.demo.module.entity.User">
+        select * from blog_usr where id = #{id}
+    </select>
+    <select id="addUser" parameterType="com.example.demo.module.entity.User">
+       <!-- insert into blog_usr (usrname,password) values(#{usrname},#{password}); -->
+       insert into blog_usr (usrname,password) select #{usrname},#{password} where not exists (select id from blog_usr where usrname=#{usrname});
+    </select>
+      <select id="removeUsr" parameterType="Integer">
+        <!-- 物理删 -->
+        <!-- delete from blog_usr where id=#{id} -->
+        <!-- 逻辑删 -->
+        update blog_usr set status = 1 where id = #{id};
+    </select>
 </mapper>
