@@ -6,6 +6,12 @@ spring:
         username: root
         password: 123456
 
+    # 配置上传文件大小限制
+    servlet:
+        multipart:
+            max-file-size: 500MB
+            max-request-size: 500MB
+
 # mybatis配置
 mybatis:
     #配置mapper xml文件所在的路径
@@ -29,3 +35,5 @@ activemq:
        idle-timeout: 30000
    queueName: publish.queue
    topicName: publish.topic
+server:
+    port: 3001
