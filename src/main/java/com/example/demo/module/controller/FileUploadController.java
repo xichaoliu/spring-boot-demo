@@ -65,13 +65,13 @@ public class FileUploadController {
       r.setCode(1);
       r.setMsg("上传失败");
     }  finally {
-        if (bos != null) {
-            try {
-                bos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+      if (bos != null) {
+        try {
+            bos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+      }
     }
 
       // return "成功上传文件";
@@ -100,7 +100,7 @@ public class FileUploadController {
         BufferedImage output = ImageIO.read(multipartFile.getInputStream());
         int imgWidth = output.getWidth();
         int imgHeight = output.getHeight();
-        int desWidth = new BigDecimal(imgWidth).multiply(
+        int desWidth = new BigDecimal(imgWidth).multiply(                         
                 new BigDecimal(accuracy)).intValue();
         int desHeight = new BigDecimal(imgHeight).multiply(
                 new BigDecimal(accuracy)).intValue();

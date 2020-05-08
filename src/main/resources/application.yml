@@ -8,6 +8,7 @@ spring:
 
     # 配置上传文件大小限制
     servlet:
+        port: 3001
         multipart:
             max-file-size: 500MB
             max-request-size: 500MB
@@ -35,5 +36,14 @@ activemq:
        idle-timeout: 30000
    queueName: publish.queue
    topicName: publish.topic
-server:
-    port: 3001
+task:
+    pool:
+        # 核心线程池大小
+        corePoolSize: 20
+        # 最大线程数
+        maxPoolSize: 40
+        # 活跃时长
+        keepAliveSeconds: 300
+        # 队列容量
+        queueCapacity: 50 
+    

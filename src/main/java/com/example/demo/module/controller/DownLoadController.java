@@ -79,29 +79,29 @@ public class DownLoadController {
 }
 
   public byte[] readInputStream(InputStream instream) throws Exception {
-  byte[] data = new byte[1024];   
-  ByteArrayOutputStream outPut = new ByteArrayOutputStream();
-  int len = 0;
+    byte[] data = new byte[1024];   
+    ByteArrayOutputStream outPut = new ByteArrayOutputStream();
+    int len = 0;
 
-  while ((len=instream.read(data))!= -1) {
-      outPut.write(data, 0,len);
-  }
-  instream.close();
-  return outPut.toByteArray();
+    while ((len=instream.read(data))!= -1) {
+        outPut.write(data, 0,len);
+    }
+    instream.close();
+    return outPut.toByteArray();
 
   }
   public void responseFile(HttpServletRequest request, HttpServletResponse response, byte[] data, String filename) throws Exception {
-  HttpStatus statusCode = HttpStatus.OK;
-  HttpHeaders headers = new HttpHeaders();
-  filename =filename+".jpg";
+    HttpStatus statusCode = HttpStatus.OK;
+    HttpHeaders headers = new HttpHeaders();
+    filename =filename+".jpg";
 
     response.setHeader("Content-Disposition", "attachment;filename="+URLEncoder.encode(filename,"UTF-8"));
 
 
-  // 将字节流写入Response
-  OutputStream toClient = response.getOutputStream();
-  toClient.write(data);
-  toClient.flush();
+    // 将字节流写入Response
+    OutputStream toClient = response.getOutputStream();
+    toClient.write(data);
+    toClient.flush();
   }
 
 } 
