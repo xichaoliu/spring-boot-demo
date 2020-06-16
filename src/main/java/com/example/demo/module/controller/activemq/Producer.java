@@ -7,7 +7,7 @@ import org.springframework.jms.core.JmsMessagingTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-// @RestController
+@RestController
 public class Producer {
   @Autowired
   private JmsMessagingTemplate jmsMessagingTemplate;

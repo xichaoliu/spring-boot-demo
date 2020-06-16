@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 
-// @Configuration
+@Configuration
 public class ScheduledConfig {
   @Value("${activemq.queueName}")
   private String queueName;

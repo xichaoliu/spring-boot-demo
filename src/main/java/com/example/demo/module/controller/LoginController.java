@@ -24,7 +24,7 @@ private final Logger logger = LoggerFactory.getLogger(this.getClass());
     Map<String, Object> map = new HashMap<>();
     logger.info("密码："+user.getPassword());
     String psw = user.getPassword();
-    if (!psw.equals("123") ) {
+    if (!psw.equals("123")) {
       map.put("code", 500);
       map.put("msg","密码错误");
     } else {

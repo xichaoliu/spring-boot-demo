@@ -8,6 +8,7 @@ import com.example.demo.module.service.UndoService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("undoService")
 public class UndoServiceImpl implements UndoService {
@@ -17,6 +18,8 @@ public class UndoServiceImpl implements UndoService {
   public User query(Integer id) {
     return  undoDao.query(id);
   }
+
+  @Transactional
   public Boolean addUser(User user) {
     return undoDao.addUser(user);
   }

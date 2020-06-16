@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
-// @Component
+@Component
 public class Consumer {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
