@@ -1,6 +1,7 @@
 package com.example.demo.module.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.example.demo.annotation.UndoLog;
@@ -26,7 +27,7 @@ public class UndoController {
     return undoService.query(id);
   }
   @PostMapping("addUsr")
-  public Object addUsr(@RequestBody User usr){
+  public Object addUsr(@RequestBody List<User> usr){
       undoService.addUser(usr);
       return "成功";
   }

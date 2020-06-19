@@ -13,14 +13,24 @@
     <select id="query" parameterType="java.lang.Integer" resultType="com.example.demo.module.entity.User">
         select * from blog_usr where id = #{id}
     </select>
-    <select id="addUser" parameterType="com.example.demo.module.entity.User">
-       <!-- insert into blog_usr (usrname,password) values(#{usrname},#{password}); -->
+    <!-- <select id="addUser" parameterType="com.example.demo.module.entity.User">
+      insert into blog_usr (usrname,password) values(#{usrname},#{password}); 
        insert into blog_usr (usrname,password) select #{usrname},#{password} where not exists (select id from blog_usr where usrname=#{usrname});
-    </select>
+    </select> -->
       <select id="removeUsr" parameterType="Integer">
         <!-- 物理删 -->
         <!-- delete from blog_usr where id=#{id} -->
         <!-- 逻辑删 -->
         update blog_usr set status = 1 where id = #{id};
     </select>
+    <insert id="addUser" parameterType="java.util.List">
+        insert into blog_usr (usrname,password) 
+        values 
+        <foreach collection="list" item="item" index="index" separator=",">
+            (
+                #{item.usrname},
+                #{item.password}
+            )
+        </foreach>
+    </insert>
 </mapper>

@@ -1,5 +1,7 @@
 package com.example.demo.module.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import com.example.demo.module.dao.UndoDao;
@@ -20,7 +22,7 @@ public class UndoServiceImpl implements UndoService {
   }
 
   @Transactional
-  public Boolean addUser(User user) {
+  public Boolean addUser(List<User> user) {
     return undoDao.addUser(user);
   }
   public void removeUsr(Integer id) {

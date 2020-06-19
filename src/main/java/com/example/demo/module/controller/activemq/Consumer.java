@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class Consumer {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-  @JmsListener(destination="publish.queue", containerFactory="jmsListenerContainerQueue")
+  // @JmsListener(destination="publish.queue", containerFactory="jmsListenerContainerQueue")
   public void receiveQueue(String text) {
     logger.info("--收到消息："+text+"---");
   }

@@ -5,12 +5,14 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.PostConstruct;
+import javax.jms.Message;
 import javax.websocket.*;
 import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 
@@ -28,6 +30,13 @@ public class WebSocketServer {
     private static final AtomicInteger OnlineCount = new AtomicInteger(0);
     // concurrent包的线程安全set，用来存放每个客户端对应的Session对象
     private static CopyOnWriteArraySet<Session> SessionSet = new CopyOnWriteArraySet<Session>();
+    /**
+     * activemq 消费者
+     */
+    @JmsListener(destination="publish.queue", containerFactory="jmsListenerContainerQueue")
+    public static void receiveAndForwardMessage(String message) {
+        BroadCastMessage(message);
+    }
 
     /**
      * 群发消息
