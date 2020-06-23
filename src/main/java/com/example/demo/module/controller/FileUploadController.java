@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.ExcelReader;
 import com.example.demo.annotation.UndoLog;
 import com.example.demo.common.util.R;
 import com.example.demo.module.entity.User;
@@ -31,8 +30,9 @@ import net.coobird.thumbnailator.Thumbnails;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.math.BigDecimal;
+import java.util.List;
 @Controller
-public class FileUploadController {
+public class FileUploadController<T extends Object> {
   private final Logger logger = LoggerFactory.getLogger(this.getClass());
   @Autowired
   private UndoService undoService;
@@ -49,9 +49,10 @@ public class FileUploadController {
   public R handleExcelUpload( @RequestParam("file") MultipartFile file) {
     R r = new R();
     try {
-      EasyExcel.read(file.getInputStream(), User.class,  new UserDataListener(undoService)).sheet().doRead();
+    List<T> list =  EasyExcel.read(file.getInputStream(), User.class,  new UserDataListener(undoService)).sheet().doReadSync();
       r.setCode(200);
       r.setMsg("上传成功");
+      r.setData(list);
     } catch (Exception e) {
       e.printStackTrace();
       //TODO: handle exception

@@ -17,11 +17,11 @@ import org.slf4j.LoggerFactory;
 
 public class JwtUtil {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-    private Integer timestamp = 10*60*10*60*1000; // 10小时
+    private final Integer TIMESTAMP = 10*60*10*60*1000; // 10小时
     Algorithm algorithm = Algorithm.HMAC256("secret");
 
     public String generateToken(User user) {
-        Long expMillis = new Date().getTime() + timestamp;
+        Long expMillis = new Date().getTime() + TIMESTAMP;
         Date exp = new Date(expMillis);
         String jwt = JWT.create()
                 .withClaim("username", user.getUsername())
