@@ -44,6 +44,7 @@ public class UserDataListener extends AnalysisEventListener<User> {
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
         saveData();
+        list.clear();
         logger.info("所有数据解析完成");
     }
     /**
